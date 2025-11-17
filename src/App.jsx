@@ -1,26 +1,36 @@
 import { useState } from 'react'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import Overview from './components/Overview'
+import Featured from './components/Featured'
+import HowItWorks from './components/HowItWorks'
+import WhyChooseUs from './components/WhyChooseUs'
+import Testimonials from './components/Testimonials'
+import CTA from './components/CTA'
+import Partners from './components/Partners'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [query, setQuery] = useState({ date: '', location: '' })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div id="top" className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-sky-50 text-gray-900">
+      <Navbar />
+      <main>
+        <Hero onStart={(q) => setQuery(q)} />
+        <Overview />
+        <Featured />
+        <HowItWorks />
+        <WhyChooseUs />
+        <Testimonials />
+        <CTA />
+        <Partners />
+      </main>
+      <footer className="py-10 text-center text-sm text-gray-500">
+        © {new Date().getFullYear()} BlissBook. All rights reserved.
+        {query.date || query.location ? (
+          <div className="mt-2 text-xs text-gray-600">Selected: {query.date || '—'} · {query.location || '—'}</div>
+        ) : null}
+      </footer>
     </div>
   )
 }
